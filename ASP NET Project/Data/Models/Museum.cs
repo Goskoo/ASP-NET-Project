@@ -12,7 +12,7 @@ namespace ASP_NET_Project.Data.Models
         public string Name { get; set; } = null!;
 
         [StringLength(CityCountryMaxLength)]
-        public string CityAndCountry { get; set; } = null!;
+        public string City{ get; set; } = null!;
 
         public string Description { get; set; } =null!;
 
