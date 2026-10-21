@@ -1,8 +1,13 @@
-﻿namespace ASP_NET_Project.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+using static ASP_NET_Project.Data.Constants.ValidationConstants;
+
+namespace ASP_NET_Project.Data.Models
 {
     public class Location
     {
         public int Id { get; set; }
+
+        [StringLength(CityCountryMaxLength)]
         public string Country { get; set; } = null!;
         
         public string RegionName { get; set; } = null!;

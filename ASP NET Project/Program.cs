@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using ASP_NET_Project.Data;
+
 namespace ASP_NET_Project
 {
     public class Program
@@ -5,9 +8,12 @@ namespace ASP_NET_Project
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            string connectionString = builder.Configuration.GetConnectionString("SqlServer") ?? throw new InvalidOperationException("Connection string 'SqlServer' not found.");
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<MineralApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString));
 
             var app = builder.Build();
 

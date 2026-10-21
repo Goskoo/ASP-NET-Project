@@ -53,17 +53,8 @@ namespace ASP_NET_Project.Data.Models
         [StringLength(TipsMaxLength)]
         public string? ProcessingTips { get; set; }
 
-
-
-        [Required]
-        public int LocationId { get; set; }
-
-        public Location Location { get; set; } = null!;
-        
-        [Required]
-        public int MuseumId { get; set; }
-
-        public Museum Museum { get; set; } = null!;
+        public ICollection<Location> Locations { get; set; } = new HashSet<Location>();
+        public ICollection<Museum> Museums { get; set; } = new HashSet<Museum>();
 
     }
 }

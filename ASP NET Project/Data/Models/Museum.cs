@@ -14,6 +14,9 @@ namespace ASP_NET_Project.Data.Models
         [StringLength(CityCountryMaxLength)]
         public string City{ get; set; } = null!;
 
+        [StringLength(CityCountryMaxLength)]
+        public string Country { get; set; } = null!;
+
         public string Description { get; set; } =null!;
 
         public ICollection<Mineral> Minerals { get; set; } = new List<Mineral>();

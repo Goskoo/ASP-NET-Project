@@ -11,7 +11,7 @@
         public const int TransparencyMaxLength = 50;
         public const int MohsScaleMaxLength = 20;
         public const int CrystalSystemMaxLength = 50;
-        public const int CrystalHabitMaxLength = 50;
+        public const int CrystalHabitMaxLength = 200;
         public const int CleavageMaxLength = 100;
         public const int FractureMaxLength = 50;
         public const int StreakMaxLength = 50;
