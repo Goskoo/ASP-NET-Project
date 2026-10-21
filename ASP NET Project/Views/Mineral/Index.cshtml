@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ASP_NET_Project.Data.Models.Mineral>
+
+@{
+    ViewData["Title"] = "Minerals";
+}
+
+<h1>Minerals</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        Add Mineral
+    </a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Colors</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var mineral in Model)
+        {
+            <tr>
+                <td>@mineral.Name</td>
+                <td>@mineral.Category</td>
+                <td>@mineral.Colors</td>
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@mineral.Id">Details</a> |
+                    <a asp-action="Edit"
+                       asp-route-id="@mineral.Id">Edit</a> |
+                    <a asp-action="Delete"
+                       asp-route-id="@mineral.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
