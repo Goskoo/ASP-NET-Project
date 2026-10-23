@@ -11,13 +11,16 @@ namespace ASP_NET_Project.Data.Models
         [StringLength(MuseumNameMaxLength, MinimumLength = MuseumNameMinLength)]
         public string Name { get; set; } = null!;
 
-        [StringLength(CityCountryMaxLength)]
+        [Required]
+        [StringLength(CityMaxLength, MinimumLength = CityMinLength)]
         public string City{ get; set; } = null!;
 
-        [StringLength(CityCountryMaxLength)]
+        [Required]
+        [StringLength(CountryMaxLength, MinimumLength = CountryMinLength)]
         public string Country { get; set; } = null!;
 
-        public string Description { get; set; } =null!;
+        [StringLength(DescriptionMaxLengthMuseum)]
+        public string? Description { get; set; }
 
         public ICollection<Mineral> Minerals { get; set; } = new List<Mineral>();
     }

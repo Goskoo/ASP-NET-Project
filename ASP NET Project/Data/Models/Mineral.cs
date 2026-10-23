@@ -7,20 +7,20 @@ namespace ASP_NET_Project.Data.Models
     public class Mineral
     {
         public int Id { get; set; }
+
         [Required]
         [StringLength(MineralNameMaxLength, MinimumLength = MineralNameMinLength)]
         public string Name { get; set; } = null!;
 
         [Required]
         public MineralCategory Category { get; set; }
-        
 
         [Required]
-        [StringLength(ColorsMaxLength)]
+        [StringLength(ColorsMaxLength, MinimumLength = ColorsMinLength)]
         public string Colors { get; set; } = null!;
 
         [Required]
-        [StringLength(LusterMaxLength)]
+        [StringLength(LusterMaxLength, MinimumLength = LusterMinLength)]
         public string Luster { get; set; } = null!;
 
         [Required]
@@ -28,7 +28,7 @@ namespace ASP_NET_Project.Data.Models
 
         [Required]
         [StringLength(MohsScaleMaxLength)]
-        public string MohsScale{ get; set; } = null!;
+        public string MohsScale { get; set; } = null!;
 
         public CrystalSystem CrystalSystem { get; set; }
 
@@ -53,8 +53,10 @@ namespace ASP_NET_Project.Data.Models
         [StringLength(TipsMaxLength)]
         public string? ProcessingTips { get; set; }
 
-        public ICollection<Location> Locations { get; set; } = new HashSet<Location>();
-        public ICollection<Museum> Museums { get; set; } = new HashSet<Museum>();
+        public ICollection<Location> Locations { get; set; }
+            = new HashSet<Location>();
 
+        public ICollection<Museum> Museums { get; set; }
+            = new HashSet<Museum>();
     }
 }

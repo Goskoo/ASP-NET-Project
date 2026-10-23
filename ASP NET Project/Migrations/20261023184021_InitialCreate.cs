@@ -18,9 +18,9 @@ namespace ASP_NET_Project.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Country = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    RegionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MiningHistoryNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    RegionName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    MiningHistoryNotes = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     IsActiveMiningSite = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -61,9 +61,9 @@ namespace ASP_NET_Project.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    City = table.Column<string>(type: "nvarchar(170)", maxLength: 170, nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true)
                 },
                 constraints: table =>
                 {

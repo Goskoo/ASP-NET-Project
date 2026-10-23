@@ -36,6 +36,10 @@ namespace ASP_NET_Project.Controllers
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
 
+            if (mineral == null)
+            {
+                return NotFound();
+            }
             return View(mineral);
         }
     }
