@@ -32,9 +32,9 @@
 
                 <td>@museum.Description</td>
 
-                <td>@museum.Country</td>
-
                 <td>@museum.City</td>
+
+                <td>@museum.Country</td>
 
                 <td>
                     @if (museum.Minerals != null && museum.Minerals.Any())
@@ -48,7 +48,8 @@
                 </td>
 
                 <td>
-                    <a asp-action="Details"
+                    <a asp-controller="Museum"
+                       asp-action="Details"
                        asp-route-id="@museum.Id">Details</a>
                 </td>
             </tr>

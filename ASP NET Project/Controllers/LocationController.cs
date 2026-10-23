@@ -14,10 +14,11 @@ namespace ASP_NET_Project.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> index()
+        public async Task<IActionResult> Index()
         {
             var location = await _context.Locations
                 .Include(l => l.Minerals)
+                .AsNoTracking()
                 .ToListAsync();
 
             return View(location);
@@ -27,6 +28,7 @@ namespace ASP_NET_Project.Controllers
         {
             var location = await _context.Locations
                 .Include(l => l.Minerals)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(l => l.Id == id);
 
             if (location == null)

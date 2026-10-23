@@ -26,6 +26,7 @@ namespace ASP_NET_Project.Controllers
         {
             var museum = await _context.Museums
                 .Include(m => m.Minerals)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
 
 

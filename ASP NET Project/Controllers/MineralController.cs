@@ -28,7 +28,16 @@ namespace ASP_NET_Project.Controllers
             return View(minerals);
         }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            var mineral = await _context.Minerals
+                .Include(m => m.Locations)
+                .Include(m => m.Museums)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
 
+            return View(mineral);
+        }
     }
 
 
