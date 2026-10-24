@@ -1,0 +1,44 @@
+﻿@using ASP_NET_Project.Data.Enum
+@model ASP_NET_Project.ViewModels.MineralFormViewModel
+
+@{
+    ViewData["Title"] = "Add Mineral";
+}
+
+<div class="row">
+    <div class="col-md-9 mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <label asp-for="Category" class="form-label"></label>
+        <select asp-for="Category" asp-items="Html.GetEnumSelectList<MineralCategory>()" class="form-select"></select>
+    </div>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Colors" class="form-label"></label>
+    <input asp-for="Colors" class="form-control" />
+    <span asp-validation-for="Colors" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Luster" class="form-label"></label>
+    <input asp-for="Luster" class="form-control" />
+    <span asp-validation-for="Luster" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Transparency" class="form-label"></label>
+    <select asp-for="Transparency" asp-items="Html.GetEnumSelectList<Transparency>()" class="form-select"></select>
+</div>
+
+<div class="mb-3">
+    <label asp-for="MohsScale" class="form-label"></label>
+    <input asp-for="MohsScale" class="form-control" />
+    <span asp-validation-for="MohsScale" class="text-danger"></span>
+</div>
+
+@* da se dobavqt ostanalite poleta *@

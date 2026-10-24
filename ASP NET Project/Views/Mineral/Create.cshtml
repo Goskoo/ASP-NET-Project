@@ -1,0 +1,19 @@
+﻿@model ASP_NET_Project.ViewModels.MineralFormViewModel
+
+@{
+    ViewData["Title"] = "Add mineral";
+}
+
+<h1>Add mineral</h1>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <partial name="MineralFormViewModel" model="Model" />
+    <button type="submit">Create</button>
+    <a asp-action="Index">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

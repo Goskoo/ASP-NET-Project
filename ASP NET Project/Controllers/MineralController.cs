@@ -1,4 +1,6 @@
 ﻿using ASP_NET_Project.Data;
+using ASP_NET_Project.Services;
+using ASP_NET_Project.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,13 +9,16 @@ namespace ASP_NET_Project.Controllers
     public class MineralController : Controller
     {
         private readonly MineralApplicationDbContext _context;
+        private readonly IMineralService _mineralService;
 
         public MineralController(
-            MineralApplicationDbContext context)
+            MineralApplicationDbContext context,
+            IMineralService mineralService)
         {
             _context = context;
+            _mineralService = mineralService;
         }
-
+        //premestvane v services 
         public async Task<IActionResult> Index(int page = 1)
         {
             const int pageSize = 50;
@@ -27,6 +32,7 @@ namespace ASP_NET_Project.Controllers
 
             return View(minerals);
         }
+        //premestvane v services 
 
         public async Task<IActionResult> Details(int id)
         {
@@ -41,6 +47,20 @@ namespace ASP_NET_Project.Controllers
                 return NotFound();
             }
             return View(mineral);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var model = await _mineralService.GetEmptyForm();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(MineralFormViewModel model)
+        {
+            int id = await _mineralService.CreateAsync(model);
+            return RedirectToAction(nameof(Details), new { id });
         }
     }
 

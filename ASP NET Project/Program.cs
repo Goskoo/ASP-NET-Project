@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using ASP_NET_Project.Data;
+using ASP_NET_Project.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASP_NET_Project
 {
@@ -14,6 +15,7 @@ namespace ASP_NET_Project
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<MineralApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+            builder.Services.AddScoped<IMineralService, MineralService>();
 
             var app = builder.Build();
 
