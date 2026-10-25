@@ -71,9 +71,35 @@ namespace ASP_NET_Project.Controllers
             await _mineralService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = await _mineralService.GetFormByIdAsync(id);
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id,MineralFormViewModel model)
+        {
+            if (id != model.Id)
+            {
+                return BadRequest();
+            }
+            if (!ModelState.IsValid)
+            {
+                
+                return View(model);
+            }
+            await _mineralService.EditAsync(id, model);
+            return RedirectToAction(nameof(Details), new { id });
+        }
     }
-
-
-
-
 }

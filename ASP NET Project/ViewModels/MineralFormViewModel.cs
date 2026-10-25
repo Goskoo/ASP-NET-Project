@@ -1,4 +1,5 @@
 ﻿using ASP_NET_Project.Data.Enum;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using static ASP_NET_Project.Data.Constants.ValidationConstants;
 
@@ -6,6 +7,8 @@ namespace ASP_NET_Project.ViewModels
 {
     public class MineralFormViewModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Mineral name is required.")]
         [StringLength(MineralNameMaxLength, MinimumLength = MineralNameMinLength,
             ErrorMessage = "Name must be between {1} and {2} characters.")]
@@ -51,5 +54,6 @@ namespace ASP_NET_Project.ViewModels
 
         [StringLength(TipsMaxLength, ErrorMessage = "Processing tips must be a maximum of {1} characters.")]
         public string? ProcessingTips { get; set; }
+
     }
 }
