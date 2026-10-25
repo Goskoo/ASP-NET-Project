@@ -2,6 +2,7 @@
 using ASP_NET_Project.Data.Enum;
 using ASP_NET_Project.Data.Models;
 using ASP_NET_Project.ViewModels;
+using Azure.Core.Pipeline;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -17,6 +18,18 @@ namespace ASP_NET_Project.Services
             _context = context;
         }
 
+        public async Task DeleteAsync(int Id)
+        {
+            var mineral = await _context.Minerals
+                .FindAsync(Id);
+            if (mineral != null)
+            {
+                _context.Minerals.Remove(mineral);
+                await _context.SaveChangesAsync();
+
+
+            }
+        }
         public async Task<IEnumerable<Mineral>> GetPageAsync(int page, int pageSize)
         {
 

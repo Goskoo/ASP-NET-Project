@@ -43,10 +43,33 @@ namespace ASP_NET_Project.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MineralFormViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             int id = await _mineralService.CreateAsync(model);
             return RedirectToAction(nameof(Details), new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var model = await _mineralService.GetByIdAsync(id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(int id)
+        {
+            await _mineralService.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 

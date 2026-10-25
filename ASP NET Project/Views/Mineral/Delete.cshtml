@@ -1,0 +1,20 @@
+﻿@model ASP_NET_Project.Data.Models.Mineral
+
+@{
+	ViewData["Title"] = "Delete Mineral";
+}
+
+<h1>Delete Mineral</h1>
+
+<partial name="_MineralDetails" model="Model"/>
+
+<div class="d-flex align-item-center gap-2">   
+        <form asp-action="DeleteConfirmation" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+        
+            <button type="submit" class="btn btn-danger">
+                Confirm Delete
+            </button>
+        </form>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</div>

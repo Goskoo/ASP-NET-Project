@@ -1,0 +1,77 @@
+﻿@model ASP_NET_Project.Data.Models.Mineral
+
+@{
+	ViewData["Title"] = "Mineral Details";
+}
+
+<h1>@Model.Name</h1>
+
+<dl class="row">
+    <dt class="col-sm-2">Category</dt>
+    <dd class="col-sm-10">@Model.Category</dd>
+
+    <dt class="col-sm-2">Colors</dt>
+    <dd class="col-sm-10">@Model.Colors</dd>
+
+    <dt class="col-sm-2">Luster</dt>
+    <dd class="col-sm-10">@Model.Luster</dd>
+
+    <dt class="col-sm-2">Transparency</dt>
+    <dd class="col-sm-10">@Model.Transparency</dd>
+
+    <dt class="col-sm-2">Mohs Scale</dt>
+    <dd class="col-sm-10">@Model.MohsScale</dd>
+
+    <dt class="col-sm-2">Crystal System</dt>
+    <dd class="col-sm-10">@Model.CrystalSystem</dd>
+
+    <dt class="col-sm-2">Crystal Habit</dt>
+    <dd class="col-sm-10">@Model.CrystalHabit</dd>
+
+    <dt class="col-sm-2">Cleavage</dt>
+    <dd class="col-sm-10">@Model.Cleavage</dd>
+
+    <dt class="col-sm-2">Fracture</dt>
+    <dd class="col-sm-10">@Model.Fracture</dd>
+
+    <dt class="col-sm-2">Streak</dt>
+    <dd class="col-sm-10">@Model.Streak</dd>
+
+    <dt class="col-sm-2">Description</dt>
+    <dd class="col-sm-10">@Model.Description</dd>
+
+    <dt class="col-sm-2">Collecting Tips</dt>
+    <dd class="col-sm-10">@Model.CollectingTips</dd>
+
+    <dt class="col-sm-2">Processing Tips</dt>
+    <dd class="col-sm-10">@Model.ProcessingTips</dd>
+</dl>
+
+<h2>Locations</h2>
+
+        <ul>
+        @foreach (var location in Model.Locations)
+        {
+            <li>
+                
+                <a asp-controller="Location"
+                   asp-action="Details"
+                   asp-route-id="@location.Id">@location.Country - @location.RegionName</a>
+                   
+            </li>
+        }
+    </ul>
+
+<h2>Musems</h2>
+
+    <ul>
+        @foreach (var museum in Model.Museums)
+        {
+            
+            <li>
+                <a asp-controller="Museum"
+                   asp-action="Details"
+                   asp-route-id="@museum.Id">@museum.Name</a>            
+            </li>
+        }
+    </ul>

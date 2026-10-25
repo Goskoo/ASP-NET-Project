@@ -10,5 +10,6 @@ namespace ASP_NET_Project.Services
         Task<Mineral?> GetByIdAsync(int id);
         Task<int> CreateAsync(MineralFormViewModel model);
         Task<MineralFormViewModel> GetEmptyForm();
+        Task DeleteAsync(int Id);
     }
 }
