@@ -8,45 +8,31 @@ namespace ASP_NET_Project.Controllers
 {
     public class MineralController : Controller
     {
-        private readonly MineralApplicationDbContext _context;
         private readonly IMineralService _mineralService;
 
-        public MineralController(
-            MineralApplicationDbContext context,
-            IMineralService mineralService)
+        public MineralController(IMineralService mineralService)
         {
-            _context = context;
             _mineralService = mineralService;
         }
-        //premestvane v services 
+
         public async Task<IActionResult> Index(int page = 1)
         {
             const int pageSize = 50;
 
-            var minerals = await _context.Minerals
-                .AsNoTracking()
-                .OrderBy(m => m.Name)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-
-            return View(minerals);
+            var model = await _mineralService.GetPageAsync(page, pageSize);
+            return View(model);
         }
-        //premestvane v services 
 
         public async Task<IActionResult> Details(int id)
         {
-            var mineral = await _context.Minerals
-                .Include(m => m.Locations)
-                .Include(m => m.Museums)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.Id == id);
+            
+            var model = await _mineralService.GetByIdAsync(id);
 
-            if (mineral == null)
+            if (model == null)
             {
                 return NotFound();
             }
-            return View(mineral);
+            return View(model);
         }
 
         [HttpGet]

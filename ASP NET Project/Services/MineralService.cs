@@ -2,6 +2,9 @@
 using ASP_NET_Project.Data.Enum;
 using ASP_NET_Project.Data.Models;
 using ASP_NET_Project.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ASP_NET_Project.Services
 {
@@ -14,6 +17,27 @@ namespace ASP_NET_Project.Services
             _context = context;
         }
 
+        public async Task<IEnumerable<Mineral>> GetPageAsync(int page, int pageSize)
+        {
+
+             return await _context.Minerals
+                .AsNoTracking()
+                .OrderBy(m => m.Name)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+        }
+
+        public async Task<Mineral?> GetByIdAsync(int id)
+        {
+            return await _context.Minerals
+                .Include(m => m.Locations)
+                .Include(m => m.Museums)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+        }
         public async Task<MineralFormViewModel> GetEmptyForm()
         {
             var model = new MineralFormViewModel();

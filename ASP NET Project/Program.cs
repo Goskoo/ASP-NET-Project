@@ -15,7 +15,9 @@ namespace ASP_NET_Project
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<MineralApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
             builder.Services.AddScoped<IMineralService, MineralService>();
+
 
             var app = builder.Build();
 
