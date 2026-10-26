@@ -9,7 +9,8 @@ namespace ASP_NET_Project
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            string connectionString = builder.Configuration.GetConnectionString("SqlServer") ?? throw new InvalidOperationException("Connection string 'SqlServer' not found.");
+            string connectionString = builder.Configuration.GetConnectionString("SqlServer") 
+                ?? throw new InvalidOperationException("Connection string 'SqlServer' not found.");
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -17,7 +18,13 @@ namespace ASP_NET_Project
                 options.UseSqlServer(connectionString));
 
             builder.Services.AddScoped<IMineralService, MineralService>();
+            builder.Services.AddScoped<ILocationService, LocationService>();
+            builder.Services.AddScoped<IMuseumService, MuseumService>();
 
+            builder.Services.AddControllersWithViews(options =>
+            {
+                options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+            });
 
             var app = builder.Build();
 

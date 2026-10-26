@@ -1,42 +1,31 @@
-﻿using ASP_NET_Project.Data;
+﻿using ASP_NET_Project.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace ASP_NET_Project.Controllers
 {
     public class LocationController : Controller
     {
-        private readonly MineralApplicationDbContext _context;
+        private readonly ILocationService _locationService;
 
         public LocationController(
-            MineralApplicationDbContext context)
+            ILocationService locationService)
         {
-            _context = context;
+            _locationService = locationService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var location = await _context.Locations
-                .Include(l => l.Minerals)
-                .AsNoTracking()
-                .ToListAsync();
-
-            return View(location);
+            var model = await _locationService.GetAllAsync();
+            return View(model);
         }
-
         public async Task<IActionResult> Details(int id)
         {
-            var location = await _context.Locations
-                .Include(l => l.Minerals)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(l => l.Id == id);
-
-            if (location == null)
+            var model = await _locationService.GetDetailsAsync(id);
+            if (model == null)
             {
                 return NotFound();
             }
-
-            return View(location);
+            return View(model);
         }
     }
 }

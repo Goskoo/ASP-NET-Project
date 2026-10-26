@@ -1,42 +1,30 @@
-﻿using ASP_NET_Project.Data;
+﻿using ASP_NET_Project.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace ASP_NET_Project.Controllers
 {
     public class MuseumController : Controller
     {
-        private readonly MineralApplicationDbContext _context;
-        public MuseumController(
-            MineralApplicationDbContext context)
+        private readonly IMuseumService _museumService;
+        public MuseumController(IMuseumService museumService)
         {
-            _context = context;
+            _museumService = museumService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var museums = await _context.Museums
-                .Include(m => m.Minerals)
-                .AsNoTracking()
-                .ToListAsync();
-
-            return View(museums);
+            var model = await _museumService.GetAllAsync();
+            return View(model);
         }
+
         public async Task<IActionResult> Details(int id)
         {
-            var museum = await _context.Museums
-                .Include(m => m.Minerals)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-
-            if (museum == null)
+            var model = await _museumService.GetDetailsAsync(id);
+            if (model == null)
             {
                 return NotFound();
             }
-
-                return View(museum);
-            
+            return View(model);
         }
     }
 }

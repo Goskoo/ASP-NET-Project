@@ -9,9 +9,9 @@
 <form asp-action="Create" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="_MineralFormViewModel" model="Model" />
-    <button type="submit">Create</button>
-    <a asp-action="Index">Cancel</a>
+    <partial name="_MineralFormFields" model="Model" />
+    <button type="submit" class="btn btn-success">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>
 
 @section Scripts {

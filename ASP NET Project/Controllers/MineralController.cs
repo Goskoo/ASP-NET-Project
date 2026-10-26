@@ -1,8 +1,6 @@
-﻿using ASP_NET_Project.Data;
-using ASP_NET_Project.Services;
+﻿using ASP_NET_Project.Services;
 using ASP_NET_Project.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace ASP_NET_Project.Controllers
 {
@@ -17,6 +15,7 @@ namespace ASP_NET_Project.Controllers
 
         public async Task<IActionResult> Index(int page = 1)
         {
+            page = Math.Max(page, 1);
             const int pageSize = 50;
 
             var model = await _mineralService.GetPageAsync(page, pageSize);
@@ -38,7 +37,7 @@ namespace ASP_NET_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var model = await _mineralService.GetEmptyForm();
+            var model = await _mineralService.GetEmptyFormAsync();
             return View(model);
         }
 
@@ -48,6 +47,7 @@ namespace ASP_NET_Project.Controllers
         {
             if (!ModelState.IsValid)
             {
+                await _mineralService.LoadOptionsAsync(model);
                 return View(model);
             }
             int id = await _mineralService.CreateAsync(model);
@@ -64,8 +64,8 @@ namespace ASP_NET_Project.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmation(int id)
         {
             await _mineralService.DeleteAsync(id);
@@ -87,18 +87,24 @@ namespace ASP_NET_Project.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,MineralFormViewModel model)
+        public async Task<IActionResult> Edit(int id, MineralFormViewModel model)
         {
             if (id != model.Id)
             {
                 return BadRequest();
             }
+
             if (!ModelState.IsValid)
             {
-                
+                await _mineralService.LoadOptionsAsync(model);
                 return View(model);
             }
-            await _mineralService.EditAsync(id, model);
+
+            if (!await _mineralService.EditAsync(id, model))
+            {
+                return NotFound();
+            }
+
             return RedirectToAction(nameof(Details), new { id });
         }
     }

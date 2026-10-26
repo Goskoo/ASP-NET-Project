@@ -27,7 +27,8 @@
                 <td>@(location.IsActiveMiningSite ? "Yes" : "No")</td>
                 <td>
                     <a asp-action="Details"
-                       asp-route-id="@location.Id">Details</a>
+                       asp-route-id="@location.Id"
+                       class="btn btn-info">Details</a>
                 </td>
             </tr>
         }

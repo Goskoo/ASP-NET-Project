@@ -7,7 +7,7 @@
 <h1>Minerals</h1>
 
 <p>
-    <a asp-action="Create">
+    <a asp-action="Create" class="btn btn-success">
         Add Mineral
     </a>
 </p>
@@ -30,11 +30,13 @@
                 <td>@mineral.Colors</td>
                 <td>
                     <a asp-action="Details"
-                       asp-route-id="@mineral.Id">Details</a> |
+                       asp-route-id="@mineral.Id"class="btn btn-info">Details</a> |
                     <a asp-action="Edit"
-                       asp-route-id="@mineral.Id">Edit</a> |
+                       asp-route-id="@mineral.Id" class="btn btn-warning">Edit</a> |
                     <a asp-action="Delete"
-                       asp-route-id="@mineral.Id">Delete</a>
+                       asp-route-id="@mineral.Id" class="btn btn-danger">Delete</a>
+                       <div class="mt-3 d-flex gap-1">
+
                 </td>
             </tr>
         }
